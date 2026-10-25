@@ -10,7 +10,7 @@ A retail sales analysis built in **Databricks SQL**: 4 tables (800 customers, 4,
 - **What I found:** **The course SQL counted product lines as orders and included tax in sales**, overstating orders by 83% and sales by 22%.
 - **Why it matters:** Rebuilt on real orders and net sales: €1.50M from 2,453 orders, with the top 20% of customers bringing 60%.
 
-**[Interactive case file](https://parthdhawan921-ops.github.io/Parth_Personal/#dbx)** · **[🎓 Course certificate](https://www.linkedin.com/learning/certificates/7e3148123c0c09e43cced77c86ea1243baa184d189e5324beaba8fb48046c7e8)** · [Databricks for Data Analysts](https://www.linkedin.com/learning/databricks-for-data-analysts) (LinkedIn Learning) · Built on Databricks Free Edition
+**[Interactive case file](https://parthdhawan921-ops.github.io/Parth_Personal/#dbx)** · **[🎞️ 11-slide presentation](presentation/Databricks_SQL_Analytics.pdf)** ([PowerPoint](presentation/Databricks_SQL_Analytics.pptx)) · **[🎓 Course certificate](https://www.linkedin.com/learning/certificates/7e3148123c0c09e43cced77c86ea1243baa184d189e5324beaba8fb48046c7e8)** · [Databricks for Data Analysts](https://www.linkedin.com/learning/databricks-for-data-analysts) (LinkedIn Learning) · Built on Databricks Free Edition
 
 ![Course dashboard dataset in Databricks SQL Editor, rows 1 and 2 highlighted: one order with the same customer, second and store](images/one_order_counted_twice.png)
 
