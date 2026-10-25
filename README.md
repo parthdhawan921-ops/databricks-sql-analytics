@@ -6,11 +6,13 @@
 
 A retail sales analysis built in **Databricks SQL**: 4 tables (800 customers, 4,494 order lines, 250 products, 20 stores across 10 European countries, 2022 to 2025) loaded from a Unity Catalog Volume into Delta tables, checked, and turned into reusable SQL views.
 
-**Headline:** the course queries overstate orders by 83% and sales by 22%. They count order **lines** as orders (4,494 against 2,453 real orders) and include tax and shipping in sales (€1.83M against €1.50M net). I traced both, rewrote the views, and checked every corrected figure against the raw tables.
+- **What I did:** Loaded a 4-table retail dataset into Databricks, ran the course's SQL, then checked what each number really counted.
+- **What I found:** **The course SQL counted product lines as orders and included tax in sales**, overstating orders by 83% and sales by 22%.
+- **Why it matters:** Rebuilt on real orders and net sales: €1.50M from 2,453 orders, with the top 20% of customers bringing 60%.
 
-**[🎓 Course certificate](https://www.linkedin.com/learning/certificates/7e3148123c0c09e43cced77c86ea1243baa184d189e5324beaba8fb48046c7e8)** · [Databricks for Data Analysts](https://www.linkedin.com/learning/databricks-for-data-analysts) (LinkedIn Learning) · Built on Databricks Free Edition
+**[Interactive case file](https://parthdhawan921-ops.github.io/Parth_Personal/#dbx)** · **[🎓 Course certificate](https://www.linkedin.com/learning/certificates/7e3148123c0c09e43cced77c86ea1243baa184d189e5324beaba8fb48046c7e8)** · [Databricks for Data Analysts](https://www.linkedin.com/learning/databricks-for-data-analysts) (LinkedIn Learning) · Built on Databricks Free Edition
 
-![Course dashboard dataset in Databricks SQL Editor. Rows 1 and 2 are one order: same customer, same second, same store](images/course_dashboard_dataset.png)
+![Course dashboard dataset in Databricks SQL Editor, rows 1 and 2 highlighted: one order with the same customer, second and store](images/one_order_counted_twice.png)
 
 *Spot it: rows 1 and 2 are **one order** (customer C000332, 2025-09-08 13:28:50, store S00014) with two products. The course dataset counts it twice.*
 
@@ -58,6 +60,12 @@ From the corrected views, on net sales (after discounts, before tax and shipping
 | Customer sales exercise (ch. 3) | `GROUP BY ... order_at` | One row per order time, so "average per customer" repeats each row's total | One row per customer, plus a per-country average |
 | Customer view (ch. 2) | Named `customers_analysis_mview` | A plain view, not a materialized view | Renamed `customer_segments` |
 
+| ![Databricks chart: the course VIP rule labels 59.13% of customers VIP](images/chart_vip_vs_regular.png) | ![Databricks chart: the course rule labels 94.40% of products High Performance](images/chart_high_vs_low.png) |
+|---|---|
+| **59%** of customers are "VIP" | **94%** of products are "High Performance" |
+
+*The course's flat €1,000 rule, charted in the Databricks SQL editor. A segment that holds most rows does not separate anyone.*
+
 The course versions are kept unchanged in [`sql/course/`](sql/course/) with the issues noted at the top of each file, so the before and after can be compared line by line.
 
 ---
@@ -84,15 +92,6 @@ The course versions are kept unchanged in [`sql/course/`](sql/course/) with the 
 2. **Delta tables:** `CREATE TABLE ... AS SELECT * FROM read_files(...)` with schema inference.
 3. **Views:** customer segments, product performance and one wide dashboard dataset.
 
-<details>
-<summary>More screenshots of the course queries running</summary>
-
-| | |
-|---|---|
-| ![Chapter 2 customer analysis view](images/course_customer_analysis_view.png) | ![Chapter 2 product performance](images/course_product_performance.png) |
-| ![Chapter 3 customer sales analysis](images/course_customer_sales_analysis.png) | |
-
-</details>
 
 ---
 
